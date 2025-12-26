@@ -1,4 +1,4 @@
-![image alt] (https://github.com/Deekshap16/PustakLok-An-Indian-Bookstore/blob/6166f8b699d522fb186ac7da8599bce53627628a/Screenshot%202025-12-26%20183804.png)
+![image alt](https://github.com/Deekshap16/PustakLok-An-Indian-Bookstore/blob/6166f8b699d522fb186ac7da8599bce53627628a/Screenshot%202025-12-26%20183804.png)
 # PustakLok - Full Stack MERN Application
 
 A beautiful, full-stack online bookstore web application inspired by crossword.in, built with the MERN stack (MongoDB, Express, React, Node.js). Features Indian literature, mythology books, and a complete e-commerce experience with authentication, cart management, and search/filter capabilities.
