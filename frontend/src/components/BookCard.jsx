@@ -9,7 +9,7 @@ const BookCard = ({ book }) => {
     >
       <div className="aspect-[3/4] bg-bookstore-beige overflow-hidden relative">
         <BookImage
-          src={book.image}
+          src={book.image || book.imageUrl}
           alt={book.title}
           title={book.title}
           className="w-full h-full object-cover"
@@ -32,7 +32,7 @@ const BookCard = ({ book }) => {
           </div>
         </div>
         <div className="flex items-center justify-between text-xs text-bookstore-brown">
-          <span>{book.genre}</span>
+          <span>{book.genre || book.category}</span>
           <span>{book.language}</span>
         </div>
       </div>

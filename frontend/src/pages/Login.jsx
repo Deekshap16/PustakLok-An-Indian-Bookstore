@@ -9,6 +9,7 @@ const Login = () => {
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [loginType, setLoginType] = useState('user'); // 'user' or 'admin'
   const { login } = useAuth();
   const navigate = useNavigate();
 
@@ -24,15 +25,31 @@ const Login = () => {
     setError('');
     setLoading(true);
 
-    const result = await login(formData.email, formData.password);
+    try {
+      // Send loginType to backend for role validation
+      const result = await login(formData.email, formData.password, loginType);
 
-    if (result.success) {
-      navigate('/');
-    } else {
-      setError(result.message);
+      if (result.success) {
+        // Backend has already validated the role
+        // Redirect based on login type
+        if (loginType === 'admin') {
+          console.log('✅ Admin login successful, redirecting to /publish');
+          navigate('/publish');
+        } else {
+          console.log('✅ User login successful, redirecting to /');
+          navigate('/');
+        }
+      } else {
+        // Backend returned an error (including admin role validation)
+        setError(result.message || 'Login failed');
+        console.error('❌ Login failed:', result.message);
+      }
+    } catch (error) {
+      console.error('❌ Login error:', error);
+      setError('An unexpected error occurred. Please try again.');
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (
@@ -41,6 +58,38 @@ const Login = () => {
         <h2 className="text-3xl font-bold text-bookstore-dark mb-6 text-center">
           Login
         </h2>
+
+        {/* Tabs for User/Admin Login */}
+        <div className="flex mb-6 border-b border-bookstore-brown">
+          <button
+            type="button"
+            onClick={() => {
+              setLoginType('user');
+              setError('');
+            }}
+            className={`flex-1 py-2 px-4 text-center font-semibold transition ${
+              loginType === 'user'
+                ? 'text-bookstore-brown border-b-2 border-bookstore-brown'
+                : 'text-bookstore-dark hover:text-bookstore-brown'
+            }`}
+          >
+            User Login
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              setLoginType('admin');
+              setError('');
+            }}
+            className={`flex-1 py-2 px-4 text-center font-semibold transition ${
+              loginType === 'admin'
+                ? 'text-bookstore-brown border-b-2 border-bookstore-brown'
+                : 'text-bookstore-dark hover:text-bookstore-brown'
+            }`}
+          >
+            Admin Login
+          </button>
+        </div>
 
         {error && (
           <div className="mb-4 p-3 bg-red-100 text-red-800 rounded-lg">
@@ -82,7 +131,7 @@ const Login = () => {
             disabled={loading}
             className="w-full px-4 py-3 bg-bookstore-brown text-white rounded-lg hover:bg-bookstore-dark transition font-semibold disabled:opacity-50"
           >
-            {loading ? 'Logging in...' : 'Login'}
+            {loading ? 'Logging in...' : loginType === 'admin' ? 'Login as Admin' : 'Login'}
           </button>
         </form>
 
@@ -101,6 +150,3 @@ const Login = () => {
 };
 
 export default Login;
-
-
-

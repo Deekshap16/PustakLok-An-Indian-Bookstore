@@ -33,7 +33,16 @@ export const authAPI = {
 // Books API
 export const booksAPI = {
   getAll: (params) => api.get('/books', { params }),
-  getById: (id) => api.get(`/books/${id}`)
+  getById: (id) => api.get(`/books/${id}`),
+  create: (bookData) => api.post('/books', bookData),
+  getMine: () => api.get('/books/my')
+};
+
+// Admin API
+export const adminAPI = {
+  getBooks: () => api.get('/admin/books'),
+  addBook: (bookData) => api.post('/admin/books', bookData),
+  deleteBook: (bookId) => api.delete(`/books/${bookId}`)
 };
 
 // Cart API

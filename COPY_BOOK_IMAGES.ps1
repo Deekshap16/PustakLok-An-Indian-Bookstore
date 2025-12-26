@@ -1,7 +1,7 @@
 # Script to copy book images from Downloads to the public/images/books folder
 
 $downloadsPath = "C:\Users\deeks\Downloads"
-$targetPath = "C:\Users\deeks\OneDrive\Desktop\crossword clone\frontend\public\images\books"
+$targetPath = "C:\Users\deeks\OneDrive\Desktop\bookstore website\frontend\public\images\books"
 
 # Create target directory if it doesn't exist
 if (-not (Test-Path $targetPath)) {
@@ -31,6 +31,8 @@ $imageMapping = @{
     "Midnight's Children" = "midnights-children"
     "The Inheritance of Loss" = "inheritance-of-loss"
     "The Namesake" = "namesake"
+    "The Bombay Prince" = "the-bombay-prince"
+    "The Mistress of Spices" = "the-mistress-of-spices"
 }
 
 # Find image files in Downloads

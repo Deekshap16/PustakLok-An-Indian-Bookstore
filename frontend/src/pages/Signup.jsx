@@ -131,15 +131,28 @@ const Signup = () => {
           </button>
         </form>
 
-        <p className="mt-6 text-center text-bookstore-dark">
-          Already have an account?{' '}
-          <Link
-            to="/login"
-            className="text-bookstore-brown hover:text-bookstore-dark font-semibold"
-          >
-            Login
-          </Link>
-        </p>
+        <div className="mt-6 space-y-3">
+          <p className="text-center text-bookstore-dark">
+            Already have an account?{' '}
+            <Link
+              to="/login"
+              className="text-bookstore-brown hover:text-bookstore-dark font-semibold"
+            >
+              Login
+            </Link>
+          </p>
+          <div className="border-t border-bookstore-brown pt-4">
+            <p className="text-center text-sm text-bookstore-dark mb-2">
+              Admin Access
+            </p>
+            <Link
+              to="/login"
+              className="block w-full text-center px-4 py-2 text-sm bg-bookstore-beige text-bookstore-dark rounded-lg hover:bg-bookstore-brown hover:text-white transition"
+            >
+              Go to Admin Panel Login
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   );

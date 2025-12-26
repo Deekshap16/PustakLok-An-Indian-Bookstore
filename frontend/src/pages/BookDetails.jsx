@@ -66,7 +66,7 @@ const BookDetails = () => {
           {/* Book Image */}
           <div className="md:w-1/3 bg-bookstore-beige flex items-center justify-center p-8">
             <BookImage
-              src={book.image}
+              src={book.image || book.imageUrl}
               alt={book.title}
               title={book.title}
               className="max-w-full h-auto rounded-lg shadow-md"

@@ -101,6 +101,14 @@ const Navbar = () => {
             {/* Auth Buttons */}
             {isAuthenticated ? (
               <div className="flex items-center space-x-3">
+                {user?.role === 'admin' && (
+                  <Link
+                    to="/admin"
+                    className="px-3 py-2 text-sm bg-bookstore-brown text-white rounded-lg hover:bg-bookstore-dark transition hidden md:inline-block"
+                  >
+                    Admin Panel
+                  </Link>
+                )}
                 <span className="text-bookstore-dark hidden md:block">
                   {user?.name}
                 </span>

@@ -35,7 +35,7 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem('user', JSON.stringify(userData));
       setUser(userData);
       
-      return { success: true };
+      return { success: true, user: userData };
     } catch (error) {
       return {
         success: false,
@@ -44,20 +44,29 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const login = async (email, password) => {
+  const login = async (email, password, loginType = 'user') => {
     try {
-      const response = await authAPI.login({ email, password });
+      console.log(`🔐 Attempting login: ${email} (type: ${loginType})`);
+      
+      // Send loginType to backend for role validation
+      const response = await authAPI.login({ email, password, loginType });
       const { token, ...userData } = response.data;
       
+      // Store token and user data
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(userData));
       setUser(userData);
       
-      return { success: true };
+      console.log(`✅ Login successful: ${userData.name} (${userData.role})`);
+      
+      return { success: true, user: userData };
     } catch (error) {
+      const errorMessage = error.response?.data?.message || 'Login failed';
+      console.error('❌ Login error:', errorMessage);
+      
       return {
         success: false,
-        message: error.response?.data?.message || 'Login failed'
+        message: errorMessage
       };
     }
   };
